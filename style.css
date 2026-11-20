@@ -900,3 +900,90 @@ body {
         max-height: 270px;
     }
 }
+
+/* WhatsApp icon hover & animation */
+.whatsapp-float .whatsapp-icon {
+    transition: transform 0.25s ease;
+}
+
+.whatsapp-float:hover .whatsapp-icon {
+    transform: scale(1.12) rotate(-6deg);
+}
+
+/* Clean WhatsApp emblem styling */
+.whatsapp-float .whatsapp-icon,
+.cart-whatsapp-btn svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Compact small floating WhatsApp icon button */
+.whatsapp-float {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+}
+
+.whatsapp-float .whatsapp-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.whatsapp-tooltip {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .whatsapp-float {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        right: 14px;
+        bottom: 14px;
+    }
+
+    .whatsapp-float .whatsapp-icon {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Order pill button ("Заказать") without heart */
+.card-like-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: var(--accent-gold);
+    color: #181824;
+    border: 1px solid var(--accent-gold);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card-like-pill:hover {
+    background-color: #ffca3a;
+    border-color: #ffca3a;
+    color: #181824;
+    transform: translateY(-1px);
+}
+
+.card-like-pill.liked {
+    background-color: var(--whatsapp-green);
+    border-color: var(--whatsapp-green);
+    color: #ffffff;
+}
+
+/* Floating WhatsApp icon only - never show phone number or tooltip text */
+.whatsapp-float .whatsapp-tooltip,
+#whatsapp-float-text {
+    display: none !important;
+    content: none !important;
+}

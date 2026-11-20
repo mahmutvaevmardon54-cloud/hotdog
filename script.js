@@ -256,7 +256,7 @@ function toggleLikeItem(itemId) {
         showToast(`${item.title} убрано из корзины`);
     } else {
         cart[itemId] = 1;
-        showToast(`❤️ ${item.title} добавлено в корзину`);
+        showToast(`${item.title} добавлено в корзину`);
     }
 
     updateCartUI();
@@ -299,16 +299,14 @@ function updateCartUI() {
     const totalAmount = getTotalAmount();
 
     cartBadge.textContent = totalCount;
-    whatsappFloatText.textContent = totalCount > 0
-        ? `Заказать (${totalCount})`
-        : `Миракмал • 8 778 823 70 05`;
+    if (whatsappFloatText) { whatsappFloatText.textContent = ""; }
 
     cartTotalPrice.textContent = `${totalAmount} ₸`;
     updateOrderButtonState();
 
     const cartIds = Object.keys(cart).map(Number);
     if (cartIds.length === 0) {
-        cartBody.innerHTML = `<div class="cart-empty">Корзина пуста.<br>Нажмите ❤️ на блюде, чтобы добавить его сюда.</div>`;
+        cartBody.innerHTML = `<div class="cart-empty">Корзина пуста.<br>Нажмите «Заказать» на блюде, чтобы добавить его сюда.</div>`;
         return;
     }
 
@@ -347,7 +345,7 @@ cartBody.addEventListener("click", (e) => {
 function sendCartToWhatsApp() {
     const cartIds = Object.keys(cart).map(Number);
     if (cartIds.length === 0) {
-        showToast("Сначала добавьте блюда в корзину ❤️");
+        showToast("Сначала добавьте блюда в корзину");
         openCartModal();
         return;
     }
@@ -363,7 +361,7 @@ function sendCartToWhatsApp() {
     }
 
     let lines = [
-        `Здравствуйте, Миракмал! Новый заказ из MMM Burger:`,
+        `Новый заказ из MMM Burger:`,
         `Имя: ${customerName}`,
         `-------------------`
     ];
@@ -467,7 +465,7 @@ function renderMenu(category = "all") {
         const imgClass = item.shape === "square" ? "card-image-wrap square-img" : "card-image-wrap";
 
         card.innerHTML = `
-            <button type="button" class="like-btn ${isLiked ? "liked" : ""}" aria-label="Добавить в корзину" title="Лайк">
+            <button type="button" class="like-btn ${isLiked ? "liked" : ""}" aria-label="Добавить в корзину" title="Заказать">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="${isLiked ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
@@ -480,7 +478,7 @@ function renderMenu(category = "all") {
             <div class="card-bottom-row">
                 <span class="card-price">${item.price} ₸</span>
                 <button type="button" class="card-like-pill ${isLiked ? "liked" : ""}">
-                    ${isLiked ? "♥ В корзине" : "♡ Лайк"}
+                    ${isLiked ? "✓ Заказать" : "Заказать"}
                 </button>
             </div>
         `;
